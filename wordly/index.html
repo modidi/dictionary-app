@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Specifies the character encoding for the webpage -->
+    <meta charset="UTF-8">
+
+    <!-- Makes the webpage responsive on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title displayed on the brwoser tab -->
+    <title>Wordly Dictionary</title>
+
+    <!-- External CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="box">
+        <!-- Header  -->
+        <header>
+            <!-- Main Page Heading -->
+        <h1>Wordly Dictionary</h1>
+
+        <!-- Brief Description -->
+         <p class="description">
+            Welcome to <strong>Wordly Dictionary</strong>, your ultimate companion for exploring language. 
+            Here, you can search for any word, view its description, master its pronunciation, learn how it is used through examples and save your favorite words for future reference.
+         </p>
+
+         <!-- Toggle Button, Change between light mode and dark mode-->
+          <button id="toggle-theme" aria-label="Toggle between light and dark theme">Toggle Theme</button>
+
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+
+            <!-- Search Section -->
+          <section class="search-section">
+    
+          <!-- Search Form, Allows the user to search for a word -->
+           <form id="search-form">
+
+            <!-- Label shows what is expected in the input field -->
+             <label for="word-input">Search For a Word</label>
+
+             <!--Input field-->
+             <input type="text" id="word-input" name="word" placeholder="Type a word..." autocomplete="off" required>
+
+             <!-- Submit button -->
+              <button type="submit">Search</button>
+
+           </form>
+
+            </section>
+
+            <!-- Message Section -->
+            <section class="message-section">
+
+              <!-- Loading Message -->
+              <!-- JavaScript displays "Loading while waiting for results" -->
+               <p id="loading-message"></p>
+
+               <!-- Error message -->
+               <!-- role="alert" helps screen readers announce the message immediately, improving accesibility -->
+               <p id="error-message" role="alert"></p>
+
+            </section>
+
+             <!-- Results Section -->
+            <!-- Js dynamically inserts dictionary information after a successful search -->
+               <section id="result">
+
+                <!-- Display searched word -->
+                 <h2 id="word"></h2>
+
+                 <!-- Display Pronunciation -->
+                    <h3>Pronunciation:</h3>
+                    <p id="pronunciation"></p>
+
+                  <!-- Audio -->
+                  <!-- Allows users to listen to the pronunciation of the searched word-->
+                   <audio id="audio" controls hidden></audio>
+
+                   <!-- Parts of Speech -->
+                   <!-- Displays whether the word is a noun, verb, adjective-->
+                        <h3>Part of speech:</h3>
+                        <p id="partofSpeech"></p>
+
+                    <!-- Definition -->
+                    <!-- Displays the meaning of the searched word -->
+                        <h3>Definition:</h3>
+                        <p id="definition"></p>
+
+                     <!-- Example -->
+                     <!-- Displays an example sentence showing how word is used , hidden until available-->
+                        <h3>Example:</h3>
+                        <p id="example" hidden></p>
+
+                      <!-- Synonyms -->
+                      <!-- Displays words that have similar meanings to the searched word, hidden until available-->
+                       <h3>Synonyms</h3>
+                       <p id="synonyms" hidden></p>
+        
+                      <!-- Source -->
+                      <!-- Displays source provided by the Dictionary API, hidden until available -->
+                       <h3>Source</h3>
+                       <a id="source" href="#" target="_blank" hidden>View Source</a>
+
+                      <!-- Save favorite button -->
+                       <button type="button" id="save-favorite">Save Favorite</button>
+               </section>
+
+               <!-- Favorite Section -->
+               <section class="favorites-section">
+
+                <h2>Favourite Words</h2>
+
+                <!-- Displayed when no favourites exist -->
+                 <p id="empty-favorites">No favorite words saved yet.</p>
+
+                <!-- Favorite words appear here, using javascript -->
+                 <ul id="favorite-list"></ul>
+
+               </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
