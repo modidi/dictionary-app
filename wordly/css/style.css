@@ -1,1 +1,391 @@
-/* General  */
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    background-color: #f3f4f6;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #333;
+    padding: 30px;
+    line-height: 1.6;
+}
+
+/* Main Container */
+.box {
+    margin: auto;
+    max-width: 1000px;
+    padding: 42px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, .12);
+}
+
+/* Header */
+header {
+    background: #f3f4f6;
+    padding: 26px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+
+}
+
+/* Title and Theme button */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* Main Heading */
+header h1 {
+    color:#000080;
+    font-size: 3rem;
+}
+
+.description {
+    font-size: 1.3rem;
+    color: #555;
+    line-height: 1.9;
+
+}
+
+/* Theme Toggle button */
+#toggle-theme {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+    border: none;
+    border-radius: 52%;
+    background-color: #000080;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#toggle-theme:hover {
+    background-color:#0000cc;
+}
+
+#toggle-theme:active {
+    transform: scale(.96);
+}
+
+#toggle-theme:focus-visible {
+    outline: 3px solid #ffd700;
+}
+
+/* Search Section */
+.search-section {
+    background: #ffffff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+/* Search Form */
+#search-form label{
+    display: block;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: #000080;
+}
+
+/* Input and button */
+.search-box {
+    display: flex;
+    gap: 12px;
+}
+
+/* Input */
+#word-input {
+    font-size: 18px;
+    padding: 14px;
+    flex: 1;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+}
+
+#word-input:focus-visible {
+    outline: 3px solid #000080;
+    border-color: #0000cc;
+}
+
+#search-form button {
+    border: none;
+    padding: 14px 28px;
+    background: #000080;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s; 
+}
+
+#search-form button:hover {
+    background: #0000cc;
+}
+
+#search-form button:active {
+    transform:scale(.97);
+}
+
+#search-form button:disabled {
+    background: #bdbdbd;
+    cursor: not-allowed;
+}
+
+#search-form button:focus-visible {
+    outline: 3px solid #ffd700;
+}
+
+/* Message Section */
+.message-section {
+    margin-bottom: 24px;
+    min-height: 42px;
+}
+
+/* Loading */
+#loading-message {
+    color:#38bdf8;
+    font-weight: bold;
+}
+
+/* Error */
+#error-message {
+    color:#dc2626;
+    font-weight: bold;;
+}
+
+/* JS adds this class while fetching */
+.loading {
+    opacity:.6;
+    pointer-events: none;
+}
+
+/* Utility class */
+.hidden{
+    display: none;
+}
+
+/* Results */
+.results-section {
+    margin-bottom: 32px;
+    padding:28px;
+    background-color: #f8fafc;
+    border-left: 6px solid #2563eb;
+    border-radius: 12px;
+}
+
+#word {
+    margin-bottom: 24px;
+    color: #000080;
+}
+
+.results-section h3{
+    color:#444;
+    margin-top: 20px;
+}
+
+.results-section p{
+    margin-top: 8px;
+    margin-bottom: 12px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Source */
+#source {
+    color:#0000cc;
+    text-decoration: none;
+}
+
+#source:hover{
+    text-decoration: underline;
+}
+
+/* Audio */
+audio {
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* Save Favorite button */
+#save-favorite {
+    margin-top: 22px;
+    background: #000080;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#save-favorite:hover {
+    background: #0000cc;
+}
+
+/* Highlighted favorite */
+.saved {
+    background:#f59e0b !important;
+}
+
+/* Favorite Section */
+.favorites-section {
+    background-color: #f3f4f6;
+    padding: 28px;
+    border-radius: 18px;
+}
+
+.favorites-section h2{
+    color: #000080;
+    margin-bottom: 22px;
+}
+
+#empty-favorites {
+    color: #666;
+    font-style: italic;
+}
+
+/* Removes bullet points */
+#favorite-list {
+    list-style: none;
+}
+
+/* Each saved favorite */
+.favorite-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-left: 5px solid #000080;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .08);
+}
+
+/* Favorite word */
+.favorite-item strong {
+    color: #000080;
+    font-size: 1.2rem;
+}
+
+.favorite-item p{
+    margin-top: 8px;
+    color: #666;
+}
+
+.favorite-item button {
+    padding: 12px 18px;
+    margin-left: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+/* Search Again button */
+.favorite-item button:first-child{
+    background: #000080;
+    color: white;
+}
+
+/* Remove button */
+.favorite-item button:last-child{
+    background: #dc2626;
+    color:white;
+}
+
+.favorite-item button:hover{
+    opacity: .9;
+}
+
+/* Responsive design */
+@media(max-width: 768px) {
+    .box{
+        padding: 26px;
+    }
+
+    header h1{
+        font-size: 2.3rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .top-header{
+        flex-direction: column;
+        gap: 22px;
+        align-items: flex-start;
+    }
+
+    .search-box {
+        flex-direction: column;
+    }
+
+    #search-form button {
+        width: 100%;
+    }
+
+    .favorite-item{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+/* Dark theme */
+body.dark-theme{
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark-theme .box{
+    background: #1f2937;
+}
+
+body.dark-theme header{
+    background: #2d3748;
+}
+
+body.dark-theme .description{
+    color: #d1d5db;
+}
+
+body.dark-theme .search-section,
+body.dark-theme .results-section,
+body.dark-theme .favorites-section{
+    background: #374151;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3 {
+    color:#60a5fa;
+}
+
+body.dark-theme input{
+    background: #1f2937;;
+    color: white;
+    border-color: #60a5fa;
+}
+
+
+
+
+   
+
+
+
+
+
+

@@ -11,24 +11,28 @@
     <title>Wordly Dictionary</title>
 
     <!-- External CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <div class="box">
         <!-- Header  -->
         <header>
+         <div class="top-header">
+
             <!-- Main Page Heading -->
-        <h1>Wordly Dictionary</h1>
+         <h1>Wordly Dictionary</h1>
+
+         <!-- Toggle Button, Change between light mode and dark mode-->
+          <button type="button" id="toggle-theme" aria-label="Toggle between light and dark theme">🌙</button>
+
+          </div>
 
         <!-- Brief Description -->
          <p class="description">
             Welcome to <strong>Wordly Dictionary</strong>, your ultimate companion for exploring language. 
             Here, you can search for any word, view its description, master its pronunciation, learn how it is used through examples and save your favorite words for future reference.
          </p>
-
-         <!-- Toggle Button, Change between light mode and dark mode-->
-          <button id="toggle-theme" aria-label="Toggle between light and dark theme">Toggle Theme</button>
 
         </header>
         
@@ -44,11 +48,15 @@
             <!-- Label shows what is expected in the input field -->
              <label for="word-input">Search For a Word</label>
 
+             <div class="search-box">
+
              <!--Input field-->
              <input type="text" id="word-input" name="word" placeholder="Type a word..." autocomplete="off" required>
 
              <!-- Submit button -->
               <button type="submit">Search</button>
+
+              </div>
 
            </form>
 
@@ -59,7 +67,7 @@
 
               <!-- Loading Message -->
               <!-- JavaScript displays "Loading while waiting for results" -->
-               <p id="loading-message"></p>
+               <p id="loading-message" role="status"></p>
 
                <!-- Error message -->
                <!-- role="alert" helps screen readers announce the message immediately, improving accesibility -->
@@ -69,7 +77,7 @@
 
              <!-- Results Section -->
             <!-- Js dynamically inserts dictionary information after a successful search -->
-               <section id="result">
+               <section id="result" class="results-section" hidden>
 
                 <!-- Display searched word -->
                  <h2 id="word"></h2>
@@ -85,7 +93,7 @@
                    <!-- Parts of Speech -->
                    <!-- Displays whether the word is a noun, verb, adjective-->
                         <h3>Part of speech:</h3>
-                        <p id="partofSpeech"></p>
+                        <p id="part-of-speech"></p>
 
                     <!-- Definition -->
                     <!-- Displays the meaning of the searched word -->
@@ -99,22 +107,22 @@
 
                       <!-- Synonyms -->
                       <!-- Displays words that have similar meanings to the searched word, hidden until available-->
-                       <h3>Synonyms</h3>
+                       <h3>Synonyms:</h3>
                        <p id="synonyms" hidden></p>
         
                       <!-- Source -->
                       <!-- Displays source provided by the Dictionary API, hidden until available -->
-                       <h3>Source</h3>
+                       <h3>Source:</h3>
                        <a id="source" href="#" target="_blank" hidden>View Source</a>
 
                       <!-- Save favorite button -->
-                       <button type="button" id="save-favorite">Save Favorite</button>
+                       <button type="button" id="save-favorite" hidden>Save Favorite</button>
                </section>
 
                <!-- Favorite Section -->
                <section class="favorites-section">
 
-                <h2>Favourite Words</h2>
+                <h2>Favorite Words</h2>
 
                 <!-- Displayed when no favourites exist -->
                  <p id="empty-favorites">No favorite words saved yet.</p>
