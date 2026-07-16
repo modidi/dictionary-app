@@ -163,7 +163,7 @@ async function fetchWord(searchWord) {
 
     } catch (error) {
         //Handle network errors
-        displayError("Something went wrong. Please try again")
+        displayError("Something went wrong. Please try again.")
     } finally {
 
         //Stop the loading state
@@ -172,3 +172,39 @@ async function fetchWord(searchWord) {
     
 }
 
+// Displays the dictionary information returned by the API
+function displayWord(data) {
+
+    //Check that the API returned a valid result
+    if (data.length === 0) {
+        displayError("Something went wrong. Please try again.");
+        return;
+    }
+
+    //Get the first dictionary entry
+    const entry = dat[0];
+
+    //Show the results section
+    resultSection.hidden = false;
+
+    //Display the searched word
+    word.textContent = entry.word;
+
+    //Display the pronunciation if available
+    if (entry.phonetic) {
+        pronunciation.textContent = entry.phonetic;
+    } else {
+        pronunciation.textContent = "";
+    }
+
+    //Display the part of speech if available
+    if(entry.meanings.length > 0) {
+        partOfSpeech.textContent = entry.meanings[0].partOfSpeech;
+    }
+
+    //Display the definition if available
+    if (entry.meanings[0].definitions.length > 0) {
+        definition.textContent = entry.meanings[0].definitions[0].definition;
+    }
+
+}
