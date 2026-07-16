@@ -27,6 +27,7 @@ Wordly Dictionary SPA is a **Single Page Application (SPA)** that allows users t
 
 ## Project Structure
 
+```text
 wordly/
 ├── index.html
 ├── css/
@@ -34,10 +35,11 @@ wordly/
 ├── js/
 │   └── index.js
 ├── assets/
+│   ├── wordlyscreenshot1.png
+│   ├── wordlyscreenshot2.png
+│   └── wordlyscreenshot3.png
 └── README.md
-    └── wordlyscreeshot1.png
-    └── wordlyscreeshot2.png
-    └── wordlyscreeshot3.png
+```
 
 ## How to run the project
 1. Clone the repository
