@@ -279,6 +279,26 @@ function displayWord(data) {
         synonyms.hidden = true;
     }
 
+    // Display the source link if available
+    if (entry.sourceUrls && entry.sourceUrls.length > 0) {
+
+        //Set the source link
+        source.href = entry.sourceUrls[0];
+
+        //Display the source text
+        source.textContent = "View Source";
+
+        //Show the source link
+        source.hidden = false;
+    
+    } else {
+
+        //Reset and hide the source link
+        source.href = "#";
+        source.textContent = "";
+        source.hidden = true;
+    }
+
 }
 
 // Finds and returns the first available audio pronunciation
@@ -356,4 +376,60 @@ function getSynonyms(entry) {
 
     //Return the completed synonym list
     return synonymList;
+}
+
+//Get saved favorite words from local storage
+function getFavorites() {
+
+    //store the current list of favorite words
+    let favorites = getFavorites();
+
+    //Try to access localstorage safely 
+    try {
+
+        //Get the data saved under the key "favorites"
+        const savedFavorites = localStorage.getItem("favorites");
+
+        //Return empty array if there is no saved data
+        if (!savedFavorites) {
+            return [];
+        }
+
+        //Convert the json string back into a javascript array
+        return JSON.parse(savedFavorites);
+
+    } catch (error) {
+
+        //If json.parse fails, return empty
+        return [];
+    }
+
+}
+
+//Save a word to the favorites list
+function saveFavorite(word, phonetic) {
+
+    //Check if the word already exists in the favorites list
+    for (let i = 0; i < favorites.length; i++) {
+
+        //Compare the words without considering uppercase or lowercase
+        if (favorites[i].word.toLowerCase() === word.toLowerCase()) {
+
+            //Stop the function if the word is already saved
+            return;
+        }
+    }
+
+    //Create a new favorite object
+    const newFavorite = {
+        word: word,
+        phonetic: phonetic
+    };
+
+    //Add the new favorite to the favorites array
+    favorites.push(newFavorite);
+
+    //Save the updated favorites array to localstorage
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
 }
