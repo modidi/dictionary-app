@@ -568,6 +568,38 @@ function saveCurrentWord() {
     updateSaveButton(currentWord);
 }
 
+//Toggle between the light and dark themes
+function toggleTheme() {
+
+    //Add or remove the dark-theme class
+    document.body.classList.toggle("dark-theme");
+
+    //Check whether the dark theme is active
+    if(document.body.classList.contains("dark-theme")) {
+
+        //Save the dark theme preference
+        localStorage.setItem("theme", "dark");
+
+    } else {
+
+        //Save the light theme preference
+        localStorage.setItem("theme", "light");
+    }
+}
+
+//Load the saved theme
+function loadTheme() {
+
+    //Get the saved theme from localStorage
+    const savedTheme = localStorage.getItem("theme");
+
+    //Check if the saved theme is dark
+    if (savedTheme === "dark") {
+
+        //Apply the dark theme
+        document.body.classList.add("dark-theme");
+    }
+}
 
 
 
