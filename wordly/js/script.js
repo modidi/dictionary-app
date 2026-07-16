@@ -32,6 +32,9 @@ const emptyFavorites = document.getElementById("empty-favorites");
 // Theme button
 const toggleThemeButton = document.getElementById("toggle-theme");
 
+//Store the favorite words
+let favorites = [];
+
 //Wait until the html page has fully loaded
 document.addEventListener("DOMContentLoaded",initializeApp);
 
@@ -152,10 +155,10 @@ async function fetchWord(searchWord) {
 
             //Dictionary API returns 404 when the word does not exist
             if(response.status === 404){
-                displayError("We could not find that word.");
+                displayError("Sorry, we couldn't find that word. Please check the spelling and try again");
             } else {
                 //Handle any other server errors
-                displayError("Something went wrong. Please try again.");
+                displayError("Something went wrong, unable to load the definition right now. Please try again.");
             }
 
             return;
@@ -389,14 +392,11 @@ function getSynonyms(entry) {
 //Get saved favorite words from local storage
 function getFavorites() {
 
-    //store the current list of favorite words
-    let favorites = getFavorites();
-
     //Try to access localstorage safely 
     try {
 
         //Get the data saved under the key "favorites"
-        const savedFavorites = localStorage.getItem("favorites");
+        const savedFavorites = localStorage.getItem("dictionaryFavorites");
 
         //Return empty array if there is no saved data
         if (!savedFavorites) {
@@ -416,6 +416,7 @@ function getFavorites() {
 
 //Save a word to the favorites list
 function saveFavorite(word, phonetic) {
+
 
     //Check if the word already exists in the favorites list
     for (let i = 0; i < favorites.length; i++) {
@@ -438,7 +439,7 @@ function saveFavorite(word, phonetic) {
     favorites.push(newFavorite);
 
     //Save the updated favorites array to localstorage
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    localStorage.setItem("dictionaryFavorites", JSON.stringify(favorites));
 
 }
 
@@ -451,7 +452,7 @@ function removeFavorite(word) {
     );
 
     //Save the updated favorites array to locaLstorage
-    localStorage.setItem("favorites", JSON.stringify(favorites));
+    localStorage.setItem("dictionaryFavorites", JSON.stringify(favorites));
 }
 
 //Display all saved favorite words
@@ -557,7 +558,7 @@ function saveCurrentWord() {
     //Get the current word and pronunciation
     const currentWord = word.textContent;
     const currentPhonetic = pronunciation.textContent;
-
+    
     //Save the word to the favorites list
     saveFavorite(currentWord, currentPhonetic);
 

@@ -221,6 +221,7 @@ audio {
 
 /* Save Favorite button */
 #save-favorite {
+    display: block;
     margin-top: 22px;
     background: #000080;
     color: white;
@@ -261,6 +262,21 @@ audio {
 /* Removes bullet points */
 #favorite-list {
     list-style: none;
+}
+
+#favorite-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#favorite-list button{
+    margin-left: 15px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* Each saved favorite */
