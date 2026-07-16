@@ -43,6 +43,12 @@ function initializeApp(){
     //Listen for theme button clicks
     toggleThemeButton.addEventListener("click", toggleTheme);
 
+    //Save the current word
+    saveFavoriteButton.addEventListener("click", saveCurrentWord);
+
+    //Load the saved favorites from localStorage
+    favorites = getFavorites();
+
     //Display savedFavorites
     displayFavorites();
 
@@ -299,6 +305,8 @@ function displayWord(data) {
         source.hidden = true;
     }
 
+    updateSaveButton(entry.word);
+
 }
 
 // Finds and returns the first available audio pronunciation
@@ -422,8 +430,8 @@ function saveFavorite(word, phonetic) {
 
     //Create a new favorite object
     const newFavorite = {
-        word: word,
-        phonetic: phonetic
+        word,
+        phonetic
     };
 
     //Add the new favorite to the favorites array
@@ -433,3 +441,118 @@ function saveFavorite(word, phonetic) {
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
 }
+
+//Remove a word from the favorites list
+function removeFavorite(word) {
+
+    //Create a new array without the selected word
+    favorites = favorites.filter(favorite => 
+        favorite.word.toLowerCase() !== word.toLowerCase()
+    );
+
+    //Save the updated favorites array to locaLstorage
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+//Display all saved favorite words
+function displayFavorites() {
+
+    //Clear any existing favorite words from the list
+    favoriteList.innerHTML = "";
+
+    //Check if there are no saved favorites
+    if(favorites.length === 0) {
+
+        //Show the empty message
+        emptyFavorites.style.display = "block";
+
+        //Stop the function
+        return;
+    }
+
+    //Hide the empty message
+    emptyFavorites.style.display = "none";
+
+    //Loop through each favorite word
+    for(let i = 0; i < favorites.length; i++) {
+
+        //Create a new list item
+        const listItem = document.createElement("li");
+
+        //Create a span to display the favorite word
+        const wordSpan =  document.createElement("span");
+
+        //Display the word and its phonetic text
+        wordSpan.textContent = `${favorites[i].word} ${favorites[i].phonetic}`;
+
+        //Allow the favorite word to be clicked
+        wordSpan.addEventListener("click", function (){
+
+            //Display the selected word in the search input
+            wordInput.value = favorites[i].word;
+
+            //Search for the selected word
+            fetchWord(favorites[i].word);
+        });
+
+        //Create a remove button
+        const removeButton =  document.createElement("button");
+
+        //Set the button text
+        removeButton.textContent = "Remove";
+
+        //Remove the favorite word when the button is clicked
+        removeButton.addEventListener("click", function () {
+
+            //Remove the selected word
+            removeFavorite(favorites[i].word);
+
+            //Update the displayed favorites
+            displayFavorites();
+        });
+
+        //Add the word and button to the list item
+        listItem.appendChild(wordSpan);
+        listItem.appendChild(removeButton);
+
+        //Add the list item to the favorite list
+        favoriteList.appendChild(listItem);
+
+    }
+
+}
+
+//Update the save favorite button
+function updateSaveButton(word) {
+
+    //Show the Save Favorite Button
+    saveFavoriteButton.hidden = false;
+
+    //Check if the word is already saved
+    const savedWord = favorites.find(favorite =>
+        favorite.word.toLowerCase() === word.toLowerCase()
+    );
+
+    //Update the button text and style
+    if(savedWord) {
+
+        //Change the button text
+        saveFavoriteButton.textContent = "Saved";
+
+        //Apply the saved style
+        saveFavoriteButton.classList.add("saved");
+    } else {
+        
+        //Change the button text
+        saveFavoriteButton.textContent = "Save Favorite";
+
+        //Remove the saved style
+        saveFavoriteButton.classList.remove("saved");
+    }
+}
+
+
+
+
+
+
