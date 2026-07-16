@@ -176,20 +176,30 @@ async function fetchWord(searchWord) {
 function displayWord(data) {
 
     //Check that the API returned a valid result
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
         displayError("Something went wrong. Please try again.");
         return;
     }
 
     //Get the first dictionary entry
-    const entry = dat[0];
+    const entry = data[0];
+
+    //Check that the entry exists
+    if(!entry) {
+        displayError("Something went wrong please try again.")
+        return;
+    }
 
     //Show the results section
     resultSection.hidden = false;
 
     //Display the searched word
-    word.textContent = entry.word;
-
+    if(entry.word){
+         word.textContent = entry.word;
+    }else {
+        word.textContent = "";
+    }
+   
     //Display the pronunciation if available
     if (entry.phonetic) {
         pronunciation.textContent = entry.phonetic;
@@ -197,14 +207,60 @@ function displayWord(data) {
         pronunciation.textContent = "";
     }
 
+    // Get the first available audio pronunciation
+    const audioUrl = getAudioUrl(entry.phonetics);
+
+    //Display the audio player if an audio file exists
+    if(audioUrl) {
+
+        //set the audio source
+        audio.src = audioUrl;
+
+        //Show the audio player
+        audio.hidden = false;
+
+    } else {
+        // Hide the audio player if no audio exists
+        audio.src = "";
+        audio.hidden = true;
+    }
+
     //Display the part of speech if available
-    if(entry.meanings.length > 0) {
+    if(entry.meanings && entry.meanings.length > 0) {
         partOfSpeech.textContent = entry.meanings[0].partOfSpeech;
+    } else {
+        partOfSpeech.textContent = "";
     }
 
     //Display the definition if available
-    if (entry.meanings[0].definitions.length > 0) {
+    if (entry.meanings &&
+        entry.meanings.length > 0 &&
+        entry.meanings[0].definitions &&
+        entry.meanings[0].definitions.length > 0) {
         definition.textContent = entry.meanings[0].definitions[0].definition;
+    } else {
+        definition.textContent = "";
     }
 
+}
+
+// Finds and returns the first available audio pronunciation
+function getAudioUrl(phonetics) {
+
+    //Check that the phonetics array exists
+    if (!phonetics) {
+        return "";
+    }
+
+    //Loop through each phonetics objects
+    for(let i = 0; i < phonetics.length; i++) {
+
+        //Check if an audio URL exists
+        if (phonetics[i].audio) {
+            return phonetics[i].audio;
+        }
+    }
+
+    //no audio found
+    return "";
 }
