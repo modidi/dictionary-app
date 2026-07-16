@@ -114,15 +114,61 @@ function displayError(message) {
 //Enables or disables the loading state while the API request is running.
 function setLoading(isLoading){
 
-    //Disable or enable the SearchButton
+    //Disable the search button while loading and enable it again when loading finishes
     searchButton.disabled = isLoading;
 
-    //Show or hide the loading message
+    //Display a loading message while the request is in progress.
+    //If loading is finished, remove the message.
     loadingMessage.textContent = isLoading
     ? "Loading definition ..."
     : "";
 
-    //Add or remove the loading css class
+    //Add or remove the loading css class on the page.
+    // When isLoading is true, class shows loading, false, loading class removed.
     document.body.classList.toggle("loading", isLoading);
+}
+
+//Fetches the searched word from the Free Dictionary API
+async function fetchWord(searchWord) {
+
+    //Show the loading state while the API request is running
+    setLoading(true);
+
+    try {
+
+        //send a request to the Dictionary API
+        const response = await fetch(
+           `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(searchWord)}`
+        );
+
+        //check if request was successful
+        if (!response.ok) {
+
+            //Dictionary API returns 404 when the word does not exist
+            if(response.status === 404){
+                displayError("We could not find that word.");
+            } else {
+                //Handle any other server errors
+                displayError("Something went wrong. Please try again.");
+            }
+
+            return;
+        }
+
+        //Convert the API response into a Javascript object
+        const data = await response.json();
+
+        //Pass the returned data to displayWord()
+        displayWord(data);
+
+    } catch (error) {
+        //Handle network errors
+        displayError("Something went wrong. Please try again")
+    } finally {
+
+        //Stop the loading state
+        setLoading(false);
+    }
+    
 }
 
