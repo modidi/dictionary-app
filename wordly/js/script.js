@@ -242,20 +242,57 @@ function displayWord(data) {
         definition.textContent = "";
     }
 
+    //Display an example sentence if available
+    if (entry.meanings && 
+        entry.meanings.length > 0 &&
+        entry.meanings[0].definitions &&
+        entry.meanings[0].definitions.length > 0 &&
+        entry.meanings[0].definitions[0].example
+    ) {
+        //Display the example sentence
+        example.textContent = entry.meanings[0].definitions[0].example;
+
+        //Show the example paragraph
+        example.hidden = false;
+    } else {
+        //clear and hide the example if none exists
+        example.textContent = "";
+        example.hidden = true;
+    }
+
+    //Get all available synonyms
+    const synonymList = getSynonyms(entry);
+
+    //Display synonyms if available
+    if (synonymList.length > 0) {
+
+        //Join all synonyms into one string separated by commas
+        synonyms.textContent = synonymList.join(", ");
+
+        //Show synonyms section
+        synonyms.hidden = false;
+
+    } else {
+
+        //Clear and hide the synonyms section
+        synonyms.textContent = "";
+        synonyms.hidden = true;
+    }
+
 }
 
 // Finds and returns the first available audio pronunciation
 function getAudioUrl(phonetics) {
 
-    //Check that the phonetics array exists
+    //Checks that the phonetics array exists
     if (!phonetics) {
         return "";
     }
 
-    //Loop through each phonetics objects
+    //Loops through each phonetics objects
     for(let i = 0; i < phonetics.length; i++) {
 
-        //Check if an audio URL exists
+        //Checks if an audio URL exists
         if (phonetics[i].audio) {
             return phonetics[i].audio;
         }
@@ -263,4 +300,60 @@ function getAudioUrl(phonetics) {
 
     //no audio found
     return "";
+}
+
+// Synonym, returns all available synonyms without duplicates
+function getSynonyms(entry) {
+
+    //Creates an empty array to store synonyms
+    const synonymList = [];
+
+    //Check if meanings exist
+    if (entry.meanings) {
+
+        //Loop through each meaning
+        for (let i = 0; i < entry.meanings.length; i++) {
+           
+            //Store the current meaning
+            const meaning = entry.meanings[i];
+
+            //Add meaning synonyms, if they exist loop through each indicidually
+            if (meaning.synonyms) {
+                for (let j = 0; j < meaning.synonyms.length; j++) {
+
+                    //Avoid duplicates
+                    if (!synonymList.includes(meaning.synonyms[j])) {
+                        synonymList.push(meaning.synonyms[j]);
+                    }
+                }
+            }
+
+            //Check if definition exist
+            if(meaning.definitions) {
+
+                //Loop through each definition
+                for(let j = 0; j < meaning.definitions.length; j++) {
+
+                    //Store the current definition
+                    const definition = meaning.definitions[j];
+
+                    //Add definition synonyms, if they exist loop through each one
+                    if (definition.synonyms) {
+
+                        for (let m = 0; m < definition.synonyms.length; m++) {
+
+                            //Avoid duplicates
+                            if(!synonymList.includes(definition.synonyms[m])) {
+                                synonymList.push(definition.synonyms[m]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    //Return the completed synonym list
+    return synonymList;
 }
