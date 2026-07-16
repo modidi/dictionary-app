@@ -435,6 +435,14 @@ body.dark-theme a:hover{
     color: #b7dcff;
 }
 
+body.dark-theme #source{
+    color: white;
+}
+
+body.dark-theme #source:hover{
+    color:#dbeafe;
+}
+
 
 
 
