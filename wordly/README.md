@@ -26,19 +26,18 @@ Wordly Dictionary SPA is a **Single Page Application (SPA)** that allows users t
 - Local Storage
 
 ## Project Structure
+
 wordly/
-│
 ├── index.html
-├── README.md
-│
 ├── css/
 │   └── style.css
-│
 ├── js/
-│   └── script.js
-│
-└── assets/
-    └── screenshot.png
+│   └── index.js
+├── assets/
+└── README.md
+    └── wordlyscreeshot1.png
+    └── wordlyscreeshot2.png
+    └── wordlyscreeshot3.png
 
 ## How to run the project
 1. Clone the repository
@@ -75,6 +74,56 @@ The API provides:
 - Example sentences
 - Synonyms
 - Source links
+```
 
 ## Usage
-1. 
+1. Enter a word
+2. Click **Search**
+3. View the returned dictionary information.
+4. Play Pronunciation audio if available.
+5. Save the word as a favorite.
+6. Remove saved favorites whenever needed.
+7. Toggle between Light and Dark Mode.
+
+## Screenshots
+![Wordly Screenshot 1](assets/wordlyscreenshot1.png)
+
+![Wordly Screenshot 2](assets/wordlyscreenshot2.png)
+
+![Wordly Screenshot 3](assets/wordlyscreenshot3.png)
+
+## Live Demo
+```
+https://modidi.github.io/dictionary-app/
+```
+
+---
+
+## GitHub Repository
+```
+https://github.com/modidi/dictionary-app
+```
+
+---
+
+## Known Limitation
+- Some words may not have pronunciation audio.
+- Some words may not include example sentences.
+- Some words may not contain synonyms.
+- The application currently supports **English words only** because of the API.
+
+## Author
+**Maureen Mutua**
+
+Github:
+```
+https://github.com/modidi
+```
+
+---
+
+## License 
+This project was created for educational purposes.
+
+
+
