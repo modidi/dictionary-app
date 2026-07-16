@@ -551,6 +551,23 @@ function updateSaveButton(word) {
     }
 }
 
+// Save the current displayed word
+function saveCurrentWord() {
+
+    //Get the current word and pronunciation
+    const currentWord = word.textContent;
+    const currentPhonetic = pronunciation.textContent;
+
+    //Save the word to the favorites list
+    saveFavorite(currentWord, currentPhonetic);
+
+    //Update the displayed favorites
+    displayFavorites();
+
+    //Update the save favorite button
+    updateSaveButton(currentWord);
+}
+
 
 
 
