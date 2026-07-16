@@ -12,7 +12,7 @@ const loadingMessage = document.getElementById("loading-message");
 const errorMessage = document.getElementById("error-message");
 
 // Results section
-const resulSection = document.getElementById("result");
+const resultSection = document.getElementById("result");
 
 // Dictionary Information
 const word = document.getElementById("word");
@@ -62,15 +62,67 @@ function handleSearch(event) {
     clearResults();
 
     //Read the users's input
-    let word = wordInput.value.trim().toLowerCase();
+    const searchWord = wordInput.value.trim().toLowerCase();
 
     //Check if the user entered a word
-    if (word === "") {
-        displayError("Please enter a word");
+    if (searchWord === "") {
+        displayError("Please enter a word.");
         return;
     }
 
     //fetch the word form the Dictionary API
-    fetchWord(word);
+    fetchWord(searchWord);
+}
+
+// Clear Results, any previous dictionary results
+function clearResults(){
+
+    // Hide the results section
+    resultSection.hidden = true;
+
+    //Clear all displayed information
+    word.textContent = "";
+    pronunciation.textContent = "";
+    partOfSpeech.textContent = "";
+    definition.textContent = "";
+
+    //Clear optional fields and hide them
+    example.textContent = "";
+    example.hidden = true;
+    synonyms.textContent = "";
+    synonyms.hidden = true;
+
+    //Reset the source link
+    source.textContent = "View Source";
+    source.href = "#";
+    source.hidden = true;
+
+    //Hide the audio player
+    audio.src = "";
+    audio.hidden = true;
+
+    //Hide the Save Favorite button
+    saveFavoriteButton.hidden = true;
+
+}
+
+//Displays Error Message
+function displayError(message) {
+    errorMessage.textContent = message;
+}
+
+//Enables or disables the loading state while the API request is running.
+function setLoading(isLoading){
+
+    //Disable or enable the SearchButton
+    searchButton.disabled = isLoading;
+
+    //Show or hide the loading message
+    loadingMessage.textContent = isLoading
+    ? "Loading definition ..."
+    : "";
+
+    //Add or remove the loading css class
+    document.body.classList.toggle("loading", isLoading);
 }
 
