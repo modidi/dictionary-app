@@ -203,6 +203,10 @@ header h1 {
     overflow-wrap: break-word;
 }
 
+#definition {
+    white-space: pre-line;
+}
+
 /* Source */
 #source {
     color:#0000cc;

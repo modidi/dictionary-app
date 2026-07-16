@@ -258,22 +258,64 @@ function displayWord(data) {
         audio.hidden = true;
     }
 
-    //Display the part of speech if available
-    if(entry.meanings && entry.meanings.length > 0) {
-        partOfSpeech.textContent = entry.meanings[0].partOfSpeech;
-    } else {
-        partOfSpeech.textContent = "";
+    //Display the all parts of speech if available
+   if (entry.meanings && entry.meanings.length > 0) {
+
+    //Create an empty string to store all parts of speech
+    let parts = "";
+
+    //Loop through each meaning
+    for(let i = 0; i < entry.meanings.length; i++) {
+
+        //Add the part of speech if it exists
+        if (entry.meanings[i].partOfSpeech) {
+            parts += entry.meanings[i].partOfSpeech;
+
+            //Separate multiple parts of speech with commas
+            if(i < entry.meanings.length -1) {
+                parts += ", ";
+            }
+        }
     }
 
-    //Display the definition if available
-    if (entry.meanings &&
-        entry.meanings.length > 0 &&
-        entry.meanings[0].definitions &&
-        entry.meanings[0].definitions.length > 0) {
-        definition.textContent = entry.meanings[0].definitions[0].definition;
+    //Display all parts of speech
+    partOfSpeech.textContent = parts;
+   } else {
+
+    //Clear the part of speech if none exists
+    partOfSpeech.textContent = "";
+   }
+
+    //Display all the definitions if available
+    if(entry.meanings && entry.meanings.length > 0) {
+
+        //Create an empty string to store alll definitions
+        let definitionsText = "";
+
+        //Loop through each meaning
+        for (let i = 0; i < entry.meanings.length; i++) {
+
+            //Check if definitions exist
+            if(entry.meanings[i].definitions && entry.meanings[i].definitions.length > 0) {
+
+                //Loop through each definition
+                for(let p = 0; p < entry.meanings[i].definitions.length; p++) {
+
+                    //Add each definition on a new line
+                    definitionsText += `${entry.meanings[i].definitions[p].definition}\n`;
+                }
+            }
+        }
+
+        //Display all definitions
+        definition.textContent = definitionsText;
+
     } else {
+
+        //Clear the definition of none exists
         definition.textContent = "";
     }
+    
 
     //Display an example sentence if available
     if (entry.meanings && 
