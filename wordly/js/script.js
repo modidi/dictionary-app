@@ -61,7 +61,7 @@ function initializeApp(){
 
 // Handle Search Submission
 function handleSearch(event) {
-    // Prevent the browser from refreshing the page
+
     event.preventDefault();
 
     //Remove any previous error message
