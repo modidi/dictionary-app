@@ -211,8 +211,32 @@ function displayWord(data) {
    
     //Display the pronunciation if available
     if (entry.phonetic) {
+        
+        //Use the main phonetic text providec by API
         pronunciation.textContent = entry.phonetic;
+
+    } else if (entry.phonetics && entry.phonetics.length > 0) {
+
+        //Clear any previous pronunciation
+        pronunciation.textContent = "";
+
+        //Loopt through the phonetics array
+        for (let i = 0; i < entry.phonetics.length; i++) {
+
+            //Check if the current phonetic contains text
+            if(entry.phonetics[i].text) {
+
+                //Display the first available phonetic text
+                pronunciation.textContent = entry.phonetics[i].text;
+
+                //Stop searching once a pronunciation has been found
+                break;
+            }
+        }
+
     } else {
+
+        //Clear the pronunciation if none is available
         pronunciation.textContent = "";
     }
 
@@ -510,6 +534,9 @@ function displayFavorites() {
 
             //Update the displayed favorites
             displayFavorites();
+
+            //Update the Save Favorite button
+            updateSaveButton(word.textContent);
         });
 
         //Add the word and button to the list item
@@ -558,7 +585,7 @@ function saveCurrentWord() {
     //Get the current word and pronunciation
     const currentWord = word.textContent;
     const currentPhonetic = pronunciation.textContent;
-    
+
     //Save the word to the favorites list
     saveFavorite(currentWord, currentPhonetic);
 
