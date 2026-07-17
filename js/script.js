@@ -126,8 +126,7 @@ function setLoading(isLoading){
     //Disable the search button while loading and enable it again when loading finishes
     searchButton.disabled = isLoading;
 
-    //Display a loading message while the request is in progress.
-    //If loading is finished, remove the message.
+    //Display a loading message while the request is in progress. If loading is finished,remove the message
     loadingMessage.textContent = isLoading
     ? "Loading definition ..."
     : "";
