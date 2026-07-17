@@ -193,6 +193,9 @@ header h1 {
 .results-section h3{
     color:#444;
     margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ddd;
 }
 
 .results-section p{
@@ -202,6 +205,7 @@ header h1 {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
+
 
 #definition {
     white-space: pre-line;
