@@ -122,18 +122,14 @@ function displayError(message) {
 
 //Enables or disables the loading state while the API request is running.
 function setLoading(isLoading){
+  //Disable the search button while loading and enable it again when loading finishes
+  searchButton.disabled = isLoading;
 
-    //Disable the search button while loading and enable it again when loading finishes
-    searchButton.disabled = isLoading;
+  //Display a loading message while the request is in progress. If loading is finished,remove the message
+  loadingMessage.textContent = isLoading ? "Loading definition ..." : "";
 
-    //Display a loading message while the request is in progress. If loading is finished,remove the message
-    loadingMessage.textContent = isLoading
-    ? "Loading definition ..."
-    : "";
-
-    //Add or remove the loading css class on the page.
-    // When isLoading is true, class shows loading, false, loading class removed.
-    document.body.classList.toggle("loading", isLoading);
+  //Add or remove the loading css class on the page.When isLoading is true, class shows loading, false, loading class removed.
+  document.body.classList.toggle("loading", isLoading);
 }
 
 //Fetches the searched word from the Free Dictionary API
@@ -315,7 +311,6 @@ function displayWord(data) {
         definition.textContent = "";
     }
     
-
     //Display an example sentence if available
     if (entry.meanings && 
         entry.meanings.length > 0 &&
@@ -481,8 +476,7 @@ function getFavorites() {
 
 //Save a word to the favorites list
 function saveFavorite(word, phonetic) {
-
-
+    
     //Check if the word already exists in the favorites list
     for (let i = 0; i < favorites.length; i++) {
 

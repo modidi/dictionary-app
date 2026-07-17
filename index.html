@@ -62,54 +62,44 @@
             <!-- Message Section -->
             <section class="message-section">
 
-              <!-- Loading Message -->
-              <!-- JavaScript displays "Loading while waiting for results" -->
+              <!-- Loading Message. JavaScript displays "Loading while waiting for results -->
                <p id="loading-message" role="status"></p>
 
-               <!-- Error message -->
-               <!-- role="alert" helps screen readers announce the message immediately, improving accesibility -->
+               <!-- Error message. role="alert" helps screen readers announce the message immediately, improving accesibility-->
                <p id="error-message" role="alert"></p>
 
             </section>
 
-             <!-- Results Section -->
-            <!-- Js dynamically inserts dictionary information after a successful search -->
+             <!-- Results Section. Js dynamically inserts dictionary information after a successful search -->
                <section id="result" class="results-section" hidden>
 
                 <!-- Display searched word -->
                  <h2 id="word"></h2>
-
                  
                  <!-- Display Pronunciation -->
                     <h3>🔊Pronunciation:</h3>
                     <p id="pronunciation"></p>
 
-                  <!-- Audio -->
-                  <!-- Allows users to listen to the pronunciation of the searched word-->
+                  <!-- Audio. Allows users to listen to the pronunciation of the searched word-->
                    <audio id="audio" controls hidden></audio>
 
-                   <!-- Parts of Speech -->
-                   <!-- Displays whether the word is a noun, verb, adjective-->
+                   <!-- Parts of Speech. Displays whether the word is a noun, verb, adjective -->
                         <h3>🏷️Part of speech:</h3>
                         <p id="part-of-speech"></p>
 
-                    <!-- Definition -->
-                    <!-- Displays the meaning of the searched word -->
+                    <!-- Definition. Displays the meaning of the searched word-->
                         <h3>📖Definition:</h3>
                         <p id="definition"></p>
 
-                     <!-- Example -->
-                     <!-- Displays an example sentence showing how word is used , hidden until available-->
+                     <!-- Example. Displays an example sentence showing how word is used , hidden until available -->
                         <h3>💬Example:</h3>
                         <p id="example" hidden></p>
 
-                      <!-- Synonyms -->
-                      <!-- Displays words that have similar meanings to the searched word, hidden until available-->
+                      <!-- Synonyms. Displays words that have similar meanings to the searched word, hidden until available -->
                        <h3>📝Synonyms:</h3>
                        <p id="synonyms" hidden></p>
         
-                      <!-- Source -->
-                      <!-- Displays source provided by the Dictionary API, hidden until available -->
+                      <!-- Source. Displays source provided by the Dictionary API, hidden until available -->
                        <h3>🔗Source:</h3>
                        <a id="source" href="#" target="_blank" hidden>View Source</a>
 
