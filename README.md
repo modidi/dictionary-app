@@ -28,7 +28,6 @@ Wordly Dictionary SPA is a **Single Page Application (SPA)** that allows users t
 ## Project Structure
 
 ```text
-wordly/
 ├── index.html
 ├── css/
 │   └── style.css
